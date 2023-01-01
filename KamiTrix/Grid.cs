@@ -8,6 +8,7 @@ namespace KamiTrix
 {
     internal class Grid
     {
+
         int height;
         int width;
         public List<List<char>> grid = new List<List<char>>();
@@ -27,6 +28,9 @@ namespace KamiTrix
             }
         }
 
+
+        //set all console positions to be random letters
+        //would use unicode but that requires fonts
         public void randomizeGrid()
         {
             for (int i = 0; i < height; i++)
@@ -41,44 +45,7 @@ namespace KamiTrix
             }
         }
 
-        (int, int) getRandomPosition()
-        {
-            Random random = new Random();
-            return (random.Next(0, height), random.Next(0, width));
-        }
-
-        (int, int) getNext(int h, int w)
-        {
-            return (h - 1, w);
-        }
-
-        public bool validBelow(int h)
-        {
-            return h < height;
-
-        }
-
-        public string getStringArr()
-        {
-            string output = "";
-            foreach (List<char> charList in grid)
-            {
-                string tmp = "";
-
-                foreach (char c in charList)
-                {
-                    tmp += c;
-                }
-
-                output += tmp;
-                output += "\n";
-
-
-            }
-
-            return output;
-        }
-
+        //returns current character grid
         public char[,] getCharArr()
         {
             char[,] output = new char[height, width];

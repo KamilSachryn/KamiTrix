@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace KamiTrix
 {
+    //Keeps track of colors for the matrix
     internal class StatusGrid
     {
+        //default values 
         const int height = 20;
         const int width = 100;
         int maxLength;
-        //public int[,] statusGrid = new int[height, width];
-        public List<List<int>> statusGrid = new System.Collections.Generic.List<List<int>>();
+        public List<List<int>> statusGrid = new List<List<int>>();
+
+
         public StatusGrid(int maxLength)
         {
             this.maxLength = maxLength;
@@ -28,17 +31,14 @@ namespace KamiTrix
             }
         }
 
+        //returns random board position for trail beggining
         public (int, int) getRandomPosition()
         {
             Random random = new Random();
             return (random.Next(0, height), random.Next(0, width));
         }
 
-        public (int, int) getNext(int h, int w)
-        {
-            return (h - 1, w);
-        }
-
+        //protect against out of range
         public bool validBelow(int h)
         {
             return h < height - 1;
@@ -64,10 +64,8 @@ namespace KamiTrix
             return output;
 
         }
-        //so if we have a list of non-0s
-        //we want to tick them down 
-        //and move it's color down 
-        //Move color down  then tick?
+        
+        //changes status of new trails to 'blue' and old trails to 'green'
         public void tickColors()
         {
             List<(int, int)> posistions = getPositionsToTick();
